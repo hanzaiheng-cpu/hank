@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de costes y flete desde China | Hank, Guangzhou</title>
+<meta name="description" content="Calculadora gratis: estima el coste de la mercancía y el flete aproximado desde China por courier, aéreo o marítimo.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Calculadora de costes y flete desde China | Hank, Guangzhou">
+<meta property="og:description" content="Calculadora gratis: estima el coste de la mercancía y el flete aproximado desde China por courier, aéreo o marítimo.">
+<meta property="og:url" content="https://hanzaiheng-cpu.github.io/hank/es/quote-calculator.html">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hanzaiheng-cpu.github.io/hank/es/quote-calculator.html">
+<link rel="alternate" hreflang="en" href="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<link rel="alternate" hreflang="es" href="https://hanzaiheng-cpu.github.io/hank/es/quote-calculator.html">
+<link rel="alternate" hreflang="ar" href="https://hanzaiheng-cpu.github.io/hank/ar/quote-calculator.html">
+<link rel="alternate" hreflang="x-default" href="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="../es/index.html">Hank <span>· Guangzhou Sourcing</span></a>
+<ul><li><a href="../es/index.html#pricing">Precios</a></li><li><a href="../es/index.html#guides">Guías</a></li><li><a href="../es/services/china-domestic-logistics.html">Logística</a></li><li><a href="../es/quote-calculator.html">Calculadora</a></li><li><a href="../es/index.html#quote">Cotización gratis</a></li><li class="lang"><a href="../quote-calculator.html" hreflang="en" lang="en">EN</a> · <a href="../es/quote-calculator.html" hreflang="es" lang="es" style="font-weight:800">ES</a> · <a href="../ar/quote-calculator.html" hreflang="ar" lang="ar">عربي</a></li></ul>
+</div></nav>
+<article class="doc">
+<span class="tag">Herramienta · Estimación</span>
+<h1>Calculadora de costes de compra en China</h1>
+<p class="meta">Solo una estimación aproximada. Las tarifas de flete son supuestos editables, no cotizaciones.</p>
+<form class="calc" id="calc" onsubmit="return false">
+<label>Precio unitario<input id="price" type="number" min="0" step="0.01" value="10"></label>
+<label>Moneda<select id="cur"><option value="CNY">CNY ¥</option><option value="USD">USD $</option></select></label>
+<label>Cantidad (uds.)<input id="qty" type="number" min="1" value="500"></label>
+<label>Peso por unidad (kg)<input id="wt" type="number" min="0" step="0.001" value="0.3"></label>
+<label>Volumen por unidad (m³)<input id="vol" type="number" min="0" step="0.0001" value="0.002"></label>
+<label>Destino<select id="dest"><option value="us">Estados Unidos</option><option value="eu">Unión Europea</option><option value="other">Otro</option></select></label>
+<label class="full" style="flex-direction:row;align-items:center;gap:8px"><input id="domon" type="checkbox"> Añadir recogida y consolidación en China (fábrica → puerto / transitario)</label>
+<label class="full">Método de envío<select id="method"><option value="express">Courier exprés</option><option value="air">Carga aérea</option><option value="sea">Marítimo (LCL)</option></select></label>
+</form>
+<details><summary>Editar supuestos (estimaciones aproximadas)</summary>
+<p>Son valores de ejemplo. Sustitúyelos por tarifas reales de tu transitario. No incluye aranceles, impuestos ni tasas.</p>
+<div class="calc">
+<label>Tipo de cambio (CNY por USD)<input id="fx" type="number" step="0.01" value="7.1"></label>
+<label>Tarifa exprés (USD/kg, aprox.)<input id="r_express" type="number" step="0.1" value="8"></label>
+<label>Tarifa aérea (USD/kg, aprox.)<input id="r_air" type="number" step="0.1" value="5"></label>
+<label>Tarifa LCL (USD/m³, mín. 1 m³, aprox.)<input id="r_sea" type="number" step="1" value="250"></label>
+<label>Recogida y consolidación (USD, valor provisional; pide cotización)<input id="dom" type="number" min="0" step="1" value="0"></label>
+<label>Ajuste por destino (×)<input id="mult" type="number" step="0.05" value="1"></label>
+</div></details>
+<div class="res" aria-live="polite"><table>
+<tr><td>Coste de la mercancía</td><td id="o_goods"></td></tr>
+<tr><td>Peso / volumen total</td><td id="o_w"></td></tr>
+<tr><td>Flete estimado (aprox.)</td><td id="o_f"></td></tr>
+<tr><td>Recogida y consolidación</td><td id="o_d"></td></tr>
+<tr><td>Mercancía + flete (estimado)</td><td id="o_t"></td></tr>
+<tr><td>Por unidad</td><td id="o_u"></td></tr>
+</table>
+<p class="note">No incluye aranceles, impuestos, agente de aduanas, inspección ni honorarios. Úsala para comparar opciones.</p>
+<h3 style="margin-top:12px">Paquete de Fiverr sugerido</h3><p id="o_pkg"></p>
+<div class="cta"><a class="btn btn-p" href="https://www.fiverr.com/zaihenghan/source-products-from-guangzhou-factories-and-1688-for-overseas-buyers" target="_blank" rel="noopener">Pedir en Fiverr</a><a class="btn btn-o" id="mail" href="mailto:hanzaiheng@gmail.com">Enviarme esta estimación por email</a></div>
+</div>
+<script>
+const P=["<b>Básico ($40)</b>: 2 proveedores, para pedidos pequeños.","<b>Estándar ($100)</b>: 4 proveedores y comparación completa.","<b>Premium ($180)</b>: 5 proveedores, comparación completa y fotos de muestras, para pedidos grandes."];
+function $(i){return document.getElementById(i)}
+function fmt(n){return "$"+n.toLocaleString("en-US",{maximumFractionDigits:2,minimumFractionDigits:2})}
+function run(){
+ const fx=+$("fx").value||7.1,q=+$("qty").value||0,p=+$("price").value||0;
+ const unitUSD=$("cur").value==="CNY"?p/fx:p, goods=unitUSD*q;
+ const w=(+$("wt").value||0)*q, v=(+$("vol").value||0)*q, vw=v*1e6/5000, cw=Math.max(w,vw);
+ const m=$("method").value, mult=(+$("mult").value||1)*($("dest").value==="other"?1.2:1);
+ let f= m==="sea"? Math.max(v,1)*(+$("r_sea").value) : cw*(+$("r_"+m).value);
+ f*=mult; const d=$("domon").checked?(+$("dom").value||0):0;
+ $("o_d").textContent=$("domon").checked?(d?"≈ "+fmt(d):"pedir cotización"):"-";
+ $("o_goods").textContent=fmt(goods);
+ $("o_w").textContent=w.toFixed(1)+" kg / "+v.toFixed(3)+" m³ ("+cw.toFixed(1)+" kg facturable)";
+ $("o_f").textContent="≈ "+fmt(f);
+ $("o_t").textContent="≈ "+fmt(goods+f+d);
+ $("o_u").textContent=q?"≈ "+fmt((goods+f+d)/q):"-";
+ $("o_pkg").innerHTML= goods<2000?P[0]:goods<10000?P[1]:P[2];
+ $("mail").href="mailto:hanzaiheng@gmail.com?subject="+encodeURIComponent("Solicitud desde la calculadora (ES)")+"&body="+encodeURIComponent("Unit price: "+p+" "+$("cur").value+"\nQty: "+q+"\nDestination: "+$("dest").value+"\nMethod: "+m+"\nEstimated goods: "+fmt(goods)+"\nDomestic pickup/consolidation: "+($("domon").checked?"yes":"no")+"\nProduct: ");
+}
+document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",run));run();
+</script>
+</article>
+<footer>© 2026 Hank · Guangzhou, China · <a href="../es/index.html">Home</a></footer>
+</body>
+</html>
