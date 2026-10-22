@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>China sourcing cost & freight calculator | Hank, Guangzhou Sourcing</title>
+<meta name="description" content="Free calculator: estimate goods cost and rough freight from China by express, air or sea, then pick the right sourcing package.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="China sourcing cost & freight calculator | Hank, Guangzhou Sourcing">
+<meta property="og:description" content="Free calculator: estimate goods cost and rough freight from China by express, air or sea, then pick the right sourcing package.">
+<meta property="og:url" content="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<link rel="alternate" hreflang="en" href="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<link rel="alternate" hreflang="es" href="https://hanzaiheng-cpu.github.io/hank/es/quote-calculator.html">
+<link rel="alternate" hreflang="ar" href="https://hanzaiheng-cpu.github.io/hank/ar/quote-calculator.html">
+<link rel="alternate" hreflang="x-default" href="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="index.html">Hank <span>· Guangzhou Sourcing</span></a>
+<ul><li><a href="index.html#pricing">Pricing</a></li><li><a href="index.html#guides">Guides</a></li><li><a href="services/china-domestic-logistics.html">Logistics</a></li><li><a href="quote-calculator.html">Quote calculator</a></li><li><a href="index.html#quote">Free quote</a></li><li class="lang"><a href="quote-calculator.html" hreflang="en" lang="en" style="font-weight:800">EN</a> · <a href="es/quote-calculator.html" hreflang="es" lang="es">ES</a> · <a href="ar/quote-calculator.html" hreflang="ar" lang="ar">عربي</a></li></ul>
+</div></nav>
+<article class="doc">
+<span class="tag">Tool · Estimate</span>
+<h1>China sourcing quote calculator</h1>
+<p class="meta">Rough estimate only. Freight rates below are editable placeholder assumptions, not quotes. Real costs depend on route, season, product and forwarder.</p>
+<form class="calc" id="calc" onsubmit="return false">
+<label>Unit price<input id="price" type="number" min="0" step="0.01" value="10"></label>
+<label>Currency<select id="cur"><option value="CNY">CNY ¥</option><option value="USD">USD $</option></select></label>
+<label>Quantity (pcs)<input id="qty" type="number" min="1" value="500"></label>
+<label>Weight per unit (kg)<input id="wt" type="number" min="0" step="0.001" value="0.3"></label>
+<label>Volume per unit (m³)<input id="vol" type="number" min="0" step="0.0001" value="0.002"></label>
+<label>Destination<select id="dest"><option value="us">United States</option><option value="eu">European Union</option><option value="other">Other</option></select></label>
+<label class="full" style="flex-direction:row;align-items:center;gap:8px"><input id="domon" type="checkbox"> Add domestic pickup &amp; consolidation in China (factory → port / forwarder)</label>
+<label class="full">Shipping method<select id="method"><option value="express">Express courier</option><option value="air">Air freight</option><option value="sea">Sea freight (LCL)</option></select></label>
+</form>
+<details><summary>Edit assumptions (rough estimates)</summary>
+<p>These are placeholders so you can play with numbers. Replace them with real rates from your forwarder. Duties, taxes and fees are not included.</p>
+<div class="calc">
+<label>Exchange rate (CNY per USD)<input id="fx" type="number" step="0.01" value="7.1"></label>
+<label>Express rate (USD/kg, rough)<input id="r_express" type="number" step="0.1" value="8"></label>
+<label>Air freight rate (USD/kg, rough)<input id="r_air" type="number" step="0.1" value="5"></label>
+<label>Sea LCL rate (USD/m³, min 1 m³, rough)<input id="r_sea" type="number" step="1" value="250"></label>
+<label>Domestic pickup &amp; consolidation (USD, placeholder; ask for a real quote)<input id="dom" type="number" min="0" step="1" value="0"></label>
+<label>Destination adjustment (×)<input id="mult" type="number" step="0.05" value="1"></label>
+</div></details>
+<div class="res" aria-live="polite"><table>
+<tr><td>Goods cost</td><td id="o_goods"></td></tr>
+<tr><td>Total weight / volume</td><td id="o_w"></td></tr>
+<tr><td>Estimated freight (rough)</td><td id="o_f"></td></tr>
+<tr><td>Domestic pickup &amp; consolidation</td><td id="o_d"></td></tr>
+<tr><td>Goods + freight estimate</td><td id="o_t"></td></tr>
+<tr><td>Per unit</td><td id="o_u"></td></tr>
+</table>
+<p class="note">Excludes duties, taxes, customs brokerage, inspection and service fees. Use it to compare options, not to budget exactly.</p>
+<h3 style="margin-top:12px">Suggested Fiverr package</h3><p id="o_pkg"></p>
+<div class="cta"><a class="btn btn-p" href="https://www.fiverr.com/zaihenghan/source-products-from-guangzhou-factories-and-1688-for-overseas-buyers" target="_blank" rel="noopener">Order on Fiverr</a><a class="btn btn-o" id="mail" href="mailto:hanzaiheng@gmail.com">Email me this estimate</a></div>
+</div>
+<script>
+const P=["<b>Basic ($40)</b>: 2 suppliers researched, a quick read for smaller orders.","<b>Standard ($100)</b>: 4 suppliers and a full comparison for buyers ready to choose.","<b>Premium ($180)</b>: 5 suppliers, full comparison and a sample photo set, for larger orders."];
+function $(i){return document.getElementById(i)}
+function fmt(n){return "$"+n.toLocaleString("en-US",{maximumFractionDigits:2,minimumFractionDigits:2})}
+function run(){
+ const fx=+$("fx").value||7.1,q=+$("qty").value||0,p=+$("price").value||0;
+ const unitUSD=$("cur").value==="CNY"?p/fx:p, goods=unitUSD*q;
+ const w=(+$("wt").value||0)*q, v=(+$("vol").value||0)*q, vw=v*1e6/5000, cw=Math.max(w,vw);
+ const m=$("method").value, mult=(+$("mult").value||1)*($("dest").value==="other"?1.2:1);
+ let f= m==="sea"? Math.max(v,1)*(+$("r_sea").value) : cw*(+$("r_"+m).value);
+ f*=mult; const d=$("domon").checked?(+$("dom").value||0):0;
+ $("o_d").textContent=$("domon").checked?(d?"≈ "+fmt(d):"ask for a quote"):"-";
+ $("o_goods").textContent=fmt(goods);
+ $("o_w").textContent=w.toFixed(1)+" kg / "+v.toFixed(3)+" m³ ("+cw.toFixed(1)+" kg chargeable)";
+ $("o_f").textContent="≈ "+fmt(f);
+ $("o_t").textContent="≈ "+fmt(goods+f+d);
+ $("o_u").textContent=q?"≈ "+fmt((goods+f+d)/q):"-";
+ $("o_pkg").innerHTML= goods<2000?P[0]:goods<10000?P[1]:P[2];
+ $("mail").href="mailto:hanzaiheng@gmail.com?subject="+encodeURIComponent("Quote calculator request")+"&body="+encodeURIComponent("Unit price: "+p+" "+$("cur").value+"\nQty: "+q+"\nDestination: "+$("dest").value+"\nMethod: "+m+"\nEstimated goods: "+fmt(goods)+"\nDomestic pickup/consolidation: "+($("domon").checked?"yes":"no")+"\nProduct: ");
+}
+document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",run));run();
+</script><p>Related: <a href="guides/yiwu-vs-guangzhou.html">Yiwu vs Guangzhou</a> · <a href="guides/factory-audit-checklist.html">Factory audit checklist</a> · <a href="guides/shipping-china-to-us-eu.html">Shipping China → US/EU</a> · <a href="quote-calculator.html">Quote calculator</a> · <a href="services/china-domestic-logistics.html">China domestic logistics</a></p><div class="endcta"><h2>Want help sourcing from China?</h2><p>Send your product and quantity, or order a fixed package on Fiverr.</p><div class="cta"><a class="btn btn-p" href="https://www.fiverr.com/zaihenghan/source-products-from-guangzhou-factories-and-1688-for-overseas-buyers" target="_blank" rel="noopener">Order on Fiverr</a><a class="btn btn-o" href="index.html#quote">Get a free sourcing quote</a></div></div>
+</article>
+<footer>© 2026 Hank · Guangzhou, China · <a href="index.html">Home</a></footer>
+</body>
+</html>
