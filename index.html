@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hank | China Sourcing Agent in Guangzhou</title>
+<meta name="description" content="Guangzhou-based sourcing help for overseas buyers: supplier shortlists, Chinese-language negotiation, clear quote comparisons, samples and optional QC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f172a;--muted:#475569;--line:#e2e8f0;--bg:#f8fafc;--brand:#b91c1c;--brand2:#f59e0b;--card:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:800;text-decoration:none;font-size:1.05rem}.logo span{color:var(--brand)}
+nav ul{display:flex;gap:22px;list-style:none;font-size:.92rem}
+nav ul a{text-decoration:none;color:var(--muted)}nav ul a:hover{color:var(--ink)}
+@media(max-width:760px){nav ul{display:none}}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:600;text-decoration:none;transition:.2s}
+.btn-p{background:var(--brand);color:#fff}.btn-p:hover{background:#991b1b}
+.btn-o{border:1.5px solid var(--ink)}.btn-o:hover{background:var(--ink);color:#fff}
+.hero{background:radial-gradient(circle at 85% 10%,#fde68a55,transparent 45%),linear-gradient(160deg,#fff,#fef2f2);padding:90px 0 80px}
+.tag{display:inline-block;background:#fee2e2;color:var(--brand);font-weight:600;font-size:.82rem;padding:5px 12px;border-radius:99px;margin-bottom:18px}
+h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:780px}
+h1 em{font-style:normal;color:var(--brand)}
+.lead{font-size:1.12rem;color:var(--muted);max-width:640px;margin:20px 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px;font-size:.88rem;color:var(--muted)}
+.chips span{background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:8px}
+section{padding:80px 0}
+section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+h2{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:8px 0 40px;max-width:640px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.card .ic{font-size:1.6rem;margin-bottom:10px}
+.card h3{font-size:1.07rem;margin-bottom:6px}
+.card p,.card li{color:var(--muted);font-size:.95rem}
+.pk{display:flex;flex-direction:column}
+.pk.feat{border:2px solid var(--brand);position:relative}
+.pk.feat:before{content:"Most useful";position:absolute;top:-12px;left:20px;background:var(--brand);color:#fff;font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:99px}
+.pk ul{list-style:none;margin:14px 0 0}.pk li{padding:6px 0;border-top:1px dashed var(--line)}
+.pk li:before{content:"✓ ";color:var(--brand);font-weight:700}
+.pk .d{font-size:.85rem;color:var(--brand);font-weight:600}
+.note{margin-top:22px;font-size:.9rem;color:var(--muted)}
+.steps{counter-reset:s;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.step{counter-increment:s;padding:24px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.step:before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;margin-bottom:12px}
+.step h3{font-size:1.03rem;margin-bottom:4px}.step p{color:var(--muted);font-size:.94rem}
+.cats{display:flex;flex-wrap:wrap;gap:12px}
+.cat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-weight:600}
+.cat small{display:block;font-weight:400;color:var(--muted);font-size:.85rem}
+.limits{background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:22px;margin-top:30px}
+.limits h3{margin-bottom:8px}.limits li{margin-left:18px;color:#78350f;font-size:.95rem}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:12px}
+summary{font-weight:600;cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}
+summary:after{content:"+";float:right;color:var(--brand);font-size:1.2rem}
+details[open] summary:after{content:"–"}
+details p{color:var(--muted);margin-top:10px}
+.contact{background:var(--ink);color:#fff;border-radius:20px;padding:48px 32px;text-align:center}
+.contact p{color:#cbd5e1;max-width:560px;margin:10px auto 26px}
+.contact ol{text-align:left;max-width:460px;margin:0 auto 28px;color:#e2e8f0;font-size:.95rem;padding-left:20px}
+.contact .btn-o{border-color:#fff;color:#fff}.contact .btn-o:hover{background:#fff;color:var(--ink)}
+.contact .cta{justify-content:center}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:30px 0}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="#">Hank <span>· Guangzhou Sourcing</span></a>
+<ul><li><a href="#services">Services</a></li><li><a href="#how">How it works</a></li><li><a href="#categories">Categories</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+<span class="tag">📍 Based in Guangzhou, China</span>
+<h1>Your China sourcing agent, <em>on the ground</em> in Guangzhou.</h1>
+<p class="lead">I help overseas buyers find real suppliers in China (not just storefronts), compare quotes clearly, and negotiate in Chinese. Samples, basic quality checks and shipping coordination are available when you need them.</p>
+<div class="cta"><a class="btn btn-p" href="#contact">Send me your product</a><a class="btn btn-o" href="#how">See how it works</a></div>
+<div class="chips"><span>English + Chinese</span><span>1688 · Alibaba · local factories</span><span>Supply chain company in setup</span></div>
+</div></header>
+
+<section id="services"><div class="wrap">
+<h2>Services</h2>
+<p class="sub">Start small with a shortlist, then add samples, checks or shipping help only if you need them.</p>
+<div class="grid">
+<div class="card"><div class="ic">🔎</div><h3>Supplier search</h3><p>A shortlist of 2–5 suppliers from 1688, Alibaba and Guangzhou-area factories or wholesalers when relevant.</p></div>
+<div class="card"><div class="ic">📊</div><h3>Quote comparison</h3><p>A clear sheet: unit price, MOQ, lead time, payment terms and red flags, plus my recommendation and a backup.</p></div>
+<div class="card"><div class="ic">💬</div><h3>Chinese negotiation</h3><p>I talk to suppliers in Chinese about price, MOQ, samples and packaging, on your terms.</p></div>
+<div class="card"><div class="ic">📦</div><h3>Samples</h3><p>Help ordering samples and passing them on, so you can judge quality before committing to bulk.</p></div>
+<div class="card"><div class="ic">✅</div><h3>Optional QC</h3><p>Basic photo and video checks on samples or before shipment. Full third-party inspection can be arranged as a custom add-on.</p></div>
+<div class="card"><div class="ic">🚢</div><h3>Shipping coordination</h3><p>Coordinating with the supplier and your freight forwarder so goods leave on time and correctly packed.</p></div>
+</div>
+
+<h2 style="margin-top:70px">Packages</h2>
+<p class="sub">Current prices are listed on Fiverr. Message me first so I can confirm fit and turnaround.</p>
+<div class="grid">
+<div class="card pk"><span class="d">2–3 days</span><h3>Supplier shortlist</h3><p>For a quick read on who makes your product.</p><ul><li>2 suppliers researched</li><li>Simple comparison sheet</li><li>1 negotiation round</li><li>1 revision</li></ul></div>
+<div class="card pk feat"><span class="d">3–5 days</span><h3>Quote comparison</h3><p>For buyers ready to choose a supplier.</p><ul><li>4 suppliers researched</li><li>Full comparison sheet</li><li>2 negotiation rounds</li><li>Sample/QC photos as add-on</li><li>2 revisions</li></ul></div>
+<div class="card pk"><span class="d">5–7 days</span><h3>Shortlist + light QC</h3><p>For buyers who want eyes on the product.</p><ul><li>5 suppliers researched</li><li>Full comparison sheet</li><li>3 negotiation rounds</li><li>1 sample batch photo set</li><li>3 revisions</li></ul></div>
+</div>
+<p class="note">Extras: additional SKUs, extra negotiation rounds, rush 24–48h shortlist, and on-site Guangzhou market or fair photo checks (custom offer).</p>
+</div></section>
+
+<section id="how" class="alt"><div class="wrap">
+<h2>How it works</h2>
+<p class="sub">Simple, transparent, and you make every decision.</p>
+<div class="steps">
+<div class="step"><h3>Send your brief</h3><p>Product link or specs, target quantity, budget, destination country and deadline.</p></div>
+<div class="step"><h3>I contact suppliers</h3><p>I research and message suppliers in Chinese, and filter out weak options.</p></div>
+<div class="step"><h3>Get your comparison</h3><p>A quote sheet with my best pick and one backup, with reasons.</p></div>
+<div class="step"><h3>You decide next steps</h3><p>Samples, a market visit, QC or shipping coordination, scoped as a follow-up.</p></div>
+</div>
+</div></section>
+
+<section id="categories"><div class="wrap">
+<h2>Categories I focus on</h2>
+<p class="sub">Not sure if your product fits? Ask. I'll tell you honestly.</p>
+<div class="cats">
+<div class="cat">🎾 Sporting goods<small>tennis gear, fitness accessories</small></div>
+<div class="cat">🏠 Home goods<small>housewares, kitchen, storage</small></div>
+<div class="cat">🎉 Festive goods<small>seasonal decor, party supplies</small></div>
+<div class="cat">👕 Apparel & accessories<small>small batch, private label</small></div>
+<div class="cat">🧰 Small OEM items<small>logo and custom packaging</small></div>
+</div>
+<div class="limits"><h3>Honest limits</h3><ul>
+<li>I don't promise the cheapest price in China, just a clear, fair comparison.</li>
+<li>No bonded warehousing or full DDP logistics at this time.</li>
+<li>Regulated goods (food, cosmetics, medical, batteries) need extra compliance time, so I'll flag it up front.</li>
+</ul></div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+<h2>Why Guangzhou</h2>
+<p class="sub">Guangzhou sits at the heart of South China's manufacturing and wholesale trade.</p>
+<div class="grid">
+<div class="card"><div class="ic">🏬</div><h3>Wholesale markets</h3><p>Large specialist markets for many categories, where I can check products and prices in person.</p></div>
+<div class="card"><div class="ic">🏛️</div><h3>Canton Fair access</h3><p>The China Import and Export Fair is held in Guangzhou's Pazhou district, so I can visit and meet exhibitors locally.</p></div>
+<div class="card"><div class="ic">🏭</div><h3>Pearl River Delta factories</h3><p>Factory clusters across the region are within reach for visits and sample pickups.</p></div>
+<div class="card"><div class="ic">✈️</div><h3>Shipping links</h3><p>Major port and air cargo links make it easier to coordinate with your forwarder.</p></div>
+</div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+<h2>FAQ</h2>
+<p class="sub">Quick answers before you reach out.</p>
+<details><summary>Do I need to message you before ordering?</summary><p>Yes. Send the product and quantity first so I can confirm I can help and give a realistic timeline.</p></details>
+<details><summary>Can you buy and ship the goods for me?</summary><p>Sourcing and quote comparison come first. Purchasing, QC and shipping coordination can be scoped separately after you pick a supplier.</p></details>
+<details><summary>Do you only work with Alibaba?</summary><p>No. I also check 1688 and Guangzhou-area factories and wholesalers when that fits the product.</p></details>
+<details><summary>What if no good supplier turns up?</summary><p>You still get my research notes and why options were rejected. We can adjust the brief for a revision.</p></details>
+<details><summary>Can you do quality inspection?</summary><p>Basic photo and video checks on samples or before shipment, yes. Full third-party AQL reports are out of scope unless we hire a local inspector as a custom add-on.</p></details>
+<details><summary>Who pays for samples?</summary><p>Sample and courier costs are paid by the buyer at cost, agreed before anything is ordered.</p></details>
+</div></section>
+
+<section id="contact"><div class="wrap">
+<div class="contact">
+<h2>Tell me what you're looking for</h2>
+<p>Message me with a few details and I'll reply with whether I can help and a realistic timeline.</p>
+<ol><li>Product link, specs or photos</li><li>Quantity (first order + reorder)</li><li>Target price or budget</li><li>Destination country</li><li>Required certifications, if any</li><li>Your deadline</li></ol>
+<div class="cta"><a class="btn btn-p" href="https://www.fiverr.com/zaihenghan/source-products-from-guangzhou-factories-and-1688-for-overseas-buyers" target="_blank" rel="noopener">Hire me on Fiverr</a><a class="btn btn-o" href="https://x.com/icqEqWqabtekru0" target="_blank" rel="noopener">Message me on X</a></div>
+</div>
+</div></section>
+
+<footer>© 2026 Hank · Guangzhou, China · China sourcing &amp; supply chain services</footer>
+</body>
+</html>
