@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة تكلفة الشراء والشحن من الصين | Hank</title>
+<meta name="description" content="حاسبة مجانية: قدّر تكلفة البضاعة والشحن التقريبي من الصين بالبريد السريع أو الجوي أو البحري.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="حاسبة تكلفة الشراء والشحن من الصين | Hank">
+<meta property="og:description" content="حاسبة مجانية: قدّر تكلفة البضاعة والشحن التقريبي من الصين بالبريد السريع أو الجوي أو البحري.">
+<meta property="og:url" content="https://hanzaiheng-cpu.github.io/hank/ar/quote-calculator.html">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hanzaiheng-cpu.github.io/hank/ar/quote-calculator.html">
+<link rel="alternate" hreflang="en" href="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<link rel="alternate" hreflang="es" href="https://hanzaiheng-cpu.github.io/hank/es/quote-calculator.html">
+<link rel="alternate" hreflang="ar" href="https://hanzaiheng-cpu.github.io/hank/ar/quote-calculator.html">
+<link rel="alternate" hreflang="x-default" href="https://hanzaiheng-cpu.github.io/hank/quote-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="../ar/index.html">Hank <span>· Guangzhou Sourcing</span></a>
+<ul><li><a href="../ar/index.html#pricing">الأسعار</a></li><li><a href="../ar/index.html#guides">الأدلة</a></li><li><a href="../ar/services/china-domestic-logistics.html">الشحن الداخلي</a></li><li><a href="../ar/quote-calculator.html">حاسبة التكلفة</a></li><li><a href="../ar/index.html#quote">عرض سعر مجاني</a></li><li class="lang"><a href="../quote-calculator.html" hreflang="en" lang="en">EN</a> · <a href="../es/quote-calculator.html" hreflang="es" lang="es">ES</a> · <a href="../ar/quote-calculator.html" hreflang="ar" lang="ar" style="font-weight:800">عربي</a></li></ul>
+</div></nav>
+<article class="doc">
+<span class="tag">أداة · تقدير</span>
+<h1>حاسبة تكلفة الشراء من الصين</h1>
+<p class="meta">تقدير تقريبي فقط. أسعار الشحن أدناه افتراضات قابلة للتعديل وليست عروض أسعار.</p>
+<form class="calc" id="calc" onsubmit="return false">
+<label>سعر الوحدة<input id="price" type="number" min="0" step="0.01" value="10"></label>
+<label>العملة<select id="cur"><option value="CNY">CNY ¥</option><option value="USD">USD $</option></select></label>
+<label>الكمية (قطعة)<input id="qty" type="number" min="1" value="500"></label>
+<label>وزن الوحدة (كغ)<input id="wt" type="number" min="0" step="0.001" value="0.3"></label>
+<label>حجم الوحدة (م³)<input id="vol" type="number" min="0" step="0.0001" value="0.002"></label>
+<label>الوجهة<select id="dest"><option value="us">الولايات المتحدة</option><option value="eu">الاتحاد الأوروبي</option><option value="other">أخرى</option></select></label>
+<label class="full" style="flex-direction:row;align-items:center;gap:8px"><input id="domon" type="checkbox"> إضافة الاستلام والتجميع داخل الصين (المصنع ← الميناء / وكيل الشحن)</label>
+<label class="full">طريقة الشحن<select id="method"><option value="express">بريد سريع</option><option value="air">شحن جوي</option><option value="sea">شحن بحري (LCL)</option></select></label>
+</form>
+<details><summary>تعديل الافتراضات (تقديرات تقريبية)</summary>
+<p>هذه قيم مؤقتة للتجربة. استبدلها بأسعار حقيقية من وكيل الشحن. لا تشمل الرسوم الجمركية والضرائب.</p>
+<div class="calc">
+<label>سعر الصرف (يوان لكل دولار)<input id="fx" type="number" step="0.01" value="7.1"></label>
+<label>سعر البريد السريع (دولار/كغ، تقريبي)<input id="r_express" type="number" step="0.1" value="8"></label>
+<label>سعر الشحن الجوي (دولار/كغ، تقريبي)<input id="r_air" type="number" step="0.1" value="5"></label>
+<label>سعر الشحن البحري (دولار/م³، حد أدنى 1 م³، تقريبي)<input id="r_sea" type="number" step="1" value="250"></label>
+<label>الاستلام والتجميع (دولار، قيمة مؤقتة؛ اطلب عرض سعر)<input id="dom" type="number" min="0" step="1" value="0"></label>
+<label>تعديل حسب الوجهة (×)<input id="mult" type="number" step="0.05" value="1"></label>
+</div></details>
+<div class="res" aria-live="polite"><table>
+<tr><td>تكلفة البضاعة</td><td id="o_goods"></td></tr>
+<tr><td>الوزن / الحجم الإجمالي</td><td id="o_w"></td></tr>
+<tr><td>الشحن التقديري (تقريبي)</td><td id="o_f"></td></tr>
+<tr><td>الاستلام والتجميع</td><td id="o_d"></td></tr>
+<tr><td>البضاعة + الشحن (تقديري)</td><td id="o_t"></td></tr>
+<tr><td>للوحدة</td><td id="o_u"></td></tr>
+</table>
+<p class="note">لا يشمل الرسوم الجمركية والضرائب والتخليص والفحص ورسوم الخدمة. استخدمه للمقارنة فقط.</p>
+<h3 style="margin-top:12px">باقة Fiverr المقترحة</h3><p id="o_pkg"></p>
+<div class="cta"><a class="btn btn-p" href="https://www.fiverr.com/zaihenghan/source-products-from-guangzhou-factories-and-1688-for-overseas-buyers" target="_blank" rel="noopener">اطلب على Fiverr</a><a class="btn btn-o" id="mail" href="mailto:hanzaiheng@gmail.com">أرسل لي هذا التقدير بالبريد</a></div>
+</div>
+<script>
+const P=["<b>أساسية ($40)</b>: موردان، للطلبات الصغيرة.","<b>قياسية ($100)</b>: 4 موردين ومقارنة كاملة.","<b>مميزة ($180)</b>: 5 موردين ومقارنة كاملة وصور للعينات، للطلبات الكبيرة."];
+function $(i){return document.getElementById(i)}
+function fmt(n){return "$"+n.toLocaleString("en-US",{maximumFractionDigits:2,minimumFractionDigits:2})}
+function run(){
+ const fx=+$("fx").value||7.1,q=+$("qty").value||0,p=+$("price").value||0;
+ const unitUSD=$("cur").value==="CNY"?p/fx:p, goods=unitUSD*q;
+ const w=(+$("wt").value||0)*q, v=(+$("vol").value||0)*q, vw=v*1e6/5000, cw=Math.max(w,vw);
+ const m=$("method").value, mult=(+$("mult").value||1)*($("dest").value==="other"?1.2:1);
+ let f= m==="sea"? Math.max(v,1)*(+$("r_sea").value) : cw*(+$("r_"+m).value);
+ f*=mult; const d=$("domon").checked?(+$("dom").value||0):0;
+ $("o_d").textContent=$("domon").checked?(d?"≈ "+fmt(d):"اطلب عرض سعر"):"-";
+ $("o_goods").textContent=fmt(goods);
+ $("o_w").textContent=w.toFixed(1)+" kg / "+v.toFixed(3)+" m³ ("+cw.toFixed(1)+" kg الوزن المحتسب)";
+ $("o_f").textContent="≈ "+fmt(f);
+ $("o_t").textContent="≈ "+fmt(goods+f+d);
+ $("o_u").textContent=q?"≈ "+fmt((goods+f+d)/q):"-";
+ $("o_pkg").innerHTML= goods<2000?P[0]:goods<10000?P[1]:P[2];
+ $("mail").href="mailto:hanzaiheng@gmail.com?subject="+encodeURIComponent("Quote calculator request (AR)")+"&body="+encodeURIComponent("Unit price: "+p+" "+$("cur").value+"\nQty: "+q+"\nDestination: "+$("dest").value+"\nMethod: "+m+"\nEstimated goods: "+fmt(goods)+"\nDomestic pickup/consolidation: "+($("domon").checked?"yes":"no")+"\nProduct: ");
+}
+document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",run));run();
+</script>
+</article>
+<footer>© 2026 Hank · Guangzhou, China · <a href="../ar/index.html">Home</a></footer>
+</body>
+</html>
