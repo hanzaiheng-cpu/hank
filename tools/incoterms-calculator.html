@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EXW, FOB and CIF price estimator | Hank</title>
+<meta name="description" content="Estimate FOB and CIF from an EXW unit price. Add inland trucking, export clearance, ocean freight and insurance. USD or CNY with your own exchange rate.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EXW, FOB and CIF price estimator | Hank">
+<meta property="og:description" content="A browser estimator from EXW to FOB to CIF. Insurance defaults to about 0.3% of the CIF value. You type the exchange rate.">
+<meta property="og:url" content="https://hanzaiheng-cpu.github.io/hank/tools/incoterms-calculator.html">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hanzaiheng-cpu.github.io/hank/tools/incoterms-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+button.btn{font:inherit;cursor:pointer}
+button.btn-o{background:#fff}
+.terms h2{margin-top:28px}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="../index.html">Hank <span>· Guangzhou Sourcing</span></a>
+<ul><li><a href="../index.html#pricing">Pricing</a></li><li><a href="../clusters/index.html">Clusters</a></li><li><a href="../services/construction-materials-export.html">Materials export</a></li><li><a href="index.html">Free tools</a></li><li><a href="../services/factory-audit-qc-inspection.html">QC &amp; audits</a></li><li><a href="../services/china-domestic-logistics.html">Logistics</a></li><li><a href="../quote-calculator.html">Quote calculator</a></li><li><a href="../index.html#quote">Free quote</a></li></ul>
+</div></nav>
+<article class="doc">
+<span class="tag">Free tool · Estimate</span>
+<h1>EXW → FOB → CIF estimator</h1>
+<p class="lead">Start from a factory EXW unit price and add the costs that usually sit between the factory door and a CIF destination port. Amounts stay in the currency you pick. This page does not look up a live exchange rate.</p>
+
+<form class="calc" id="calc" onsubmit="return false">
+<label>Currency
+<select id="cur">
+<option value="USD">USD</option>
+<option value="CNY">CNY</option>
+</select>
+</label>
+<label>Exchange rate (CNY per 1 USD)
+<input id="fx" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 7.2">
+</label>
+<label>EXW unit price <span class="unit"></span>
+<input id="exw" type="number" inputmode="decimal" min="0" step="any" value="10">
+</label>
+<label>Quantity
+<input id="qty" type="number" inputmode="decimal" min="0" step="any" value="1000">
+</label>
+<label>Inland trucking to port <span class="unit"></span>
+<input id="truck" type="number" inputmode="decimal" min="0" step="any" value="0" placeholder="shipment total">
+</label>
+<label>Port and export clearance <span class="unit"></span>
+<input id="clear" type="number" inputmode="decimal" min="0" step="any" value="0" placeholder="shipment total">
+</label>
+<label class="full">Ocean freight <span class="unit"></span>
+<input id="freight" type="number" inputmode="decimal" min="0" step="any" value="0" placeholder="shipment total">
+</label>
+<label class="full">Insurance rate (% of CIF)
+<input id="ins" type="number" inputmode="decimal" min="0" max="99" step="any" value="0.3">
+</label>
+</form>
+<p class="meta">Trucking, clearance and ocean freight are totals for the shipment, not per piece. 0.3 in the insurance field means 0.3%, not 30%. Leave the exchange rate blank if you only want one currency.</p>
+
+<div class="res" aria-live="polite">
+<p id="err" class="note" hidden></p>
+<table id="out">
+<tr><td>EXW total</td><td id="o_exw"></td></tr>
+<tr><td>Inland trucking</td><td id="o_truck"></td></tr>
+<tr><td>Port and export clearance</td><td id="o_clear"></td></tr>
+<tr><td>FOB total</td><td id="o_fob"></td></tr>
+<tr><td>FOB per unit</td><td id="o_fobu"></td></tr>
+<tr><td>Ocean freight</td><td id="o_freight"></td></tr>
+<tr><td>Insurance</td><td id="o_ins"></td></tr>
+<tr><td>CIF total</td><td id="o_cif"></td></tr>
+<tr><td>CIF per unit</td><td id="o_cifu"></td></tr>
+</table>
+<p class="note">Results are estimates from the numbers you type. They are not a freight quote, an insurance offer, or a customs value. Duty, VAT and delivery after the destination port are not included.</p>
+</div>
+
+<div class="terms">
+<h2>What the terms mean here</h2>
+<h3 style="margin-top:18px">EXW — Ex Works</h3>
+<p>The seller's price at their door. You arrange and pay to move the goods, unless the contract says otherwise. In this estimator the EXW total is the unit price times quantity.</p>
+<h3 style="margin-top:18px">FOB — Free On Board</h3>
+<p>EXW plus the cost of getting the goods through export and onto the ship. Here that added cost is inland trucking to the port plus port and export clearance. Ocean freight and insurance are not in the FOB figure.</p>
+<h3 style="margin-top:18px">CIF — Cost, Insurance and Freight</h3>
+<p>FOB plus ocean freight and insurance to the destination port. Insurance is a percentage of the CIF value, so the CIF total is (FOB + ocean freight) divided by (1 − insurance rate). The default rate is 0.3% of that CIF value. Change it to the rate your insurer quoted.</p>
+</div>
+
+<div class="endcta">
+<h2>Want a real EXW or FOB handoff?</h2>
+<p>I can shortlist factories, consolidate in Guangzhou, and hand the cargo to your forwarder at a major Chinese port.</p>
+<div class="cta">
+<a class="btn btn-p" href="../services/construction-materials-export.html">Construction materials export</a>
+<a class="btn btn-o" href="../index.html#quote">Free quote form</a>
+</div>
+</div>
+</article>
+<footer>© 2026 Hank · Guangzhou, China · <a href="../index.html">Home</a> · <a href="index.html">Free tools</a> · <a href="../services/construction-materials-export.html">Materials export</a> · <a href="../index.html#quote">Free quote</a> · <a href="../clusters/index.html">Industrial clusters</a> · <a href="../services/sample-consolidation.html">Sample consolidation</a> · <a href="../services/china-domestic-logistics.html">Logistics</a></footer>
+<script>
+function $(id){return document.getElementById(id)}
+function read(id){
+  var raw=$(id).value.trim();
+  if(raw==="") return null;
+  var n=Number(raw);
+  return Number.isFinite(n)?n:NaN;
+}
+function money(n,cur){
+  var sym=cur==="USD"?"$":"¥";
+  return sym+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function pair(n,cur,fx){
+  var main=money(n,cur);
+  if(!(fx>0)) return main;
+  var other=cur==="USD"?n*fx:n/fx;
+  var otherCur=cur==="USD"?"CNY":"USD";
+  return main+" ("+money(other,otherCur)+")";
+}
+function run(){
+  var cur=$("cur").value;
+  document.querySelectorAll(".unit").forEach(function(el){el.textContent="("+cur+")"});
+  var exw=read("exw"), qty=read("qty"), truck=read("truck"), clear=read("clear"), freight=read("freight"), ins=read("ins"), fx=read("fx");
+  if(truck===null) truck=0;
+  if(clear===null) clear=0;
+  if(freight===null) freight=0;
+  var err="";
+  if(exw===null||Number.isNaN(exw)||exw<0) err="Enter an EXW unit price of 0 or more.";
+  else if(qty===null||Number.isNaN(qty)||qty<=0) err="Enter a quantity greater than 0.";
+  else if([truck,clear,freight].some(function(n){return Number.isNaN(n)||n<0})) err="Trucking, clearance and freight must be 0 or more.";
+  else if(ins===null||Number.isNaN(ins)||ins<0||ins>=100) err="Insurance rate must be 0 or more and under 100%.";
+  else if(fx!==null&&(Number.isNaN(fx)||fx<0)) err="Exchange rate must be blank or greater than 0.";
+  $("err").hidden=!err;
+  $("err").textContent=err;
+  $("out").hidden=!!err;
+  if(err) return;
+  var exwTotal=exw*qty;
+  var fob=exwTotal+truck+clear;
+  var rate=ins/100;
+  var cif=(fob+freight)/(1-rate);
+  var insurance=cif-fob-freight;
+  var fxOk=fx>0?fx:null;
+  $("o_exw").textContent=pair(exwTotal,cur,fxOk);
+  $("o_truck").textContent=pair(truck,cur,fxOk);
+  $("o_clear").textContent=pair(clear,cur,fxOk);
+  $("o_fob").textContent=pair(fob,cur,fxOk);
+  $("o_fobu").textContent=pair(fob/qty,cur,fxOk);
+  $("o_freight").textContent=pair(freight,cur,fxOk);
+  $("o_ins").textContent=pair(insurance,cur,fxOk);
+  $("o_cif").textContent=pair(cif,cur,fxOk);
+  $("o_cifu").textContent=pair(cif/qty,cur,fxOk);
+}
+document.getElementById("calc").addEventListener("input",run);
+run();
+</script>
+</body>
+</html>
