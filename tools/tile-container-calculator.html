@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiles and slabs per container | Hank</title>
+<meta name="description" content="Estimate how many tiles or slabs fit in a 20GP or 40HQ. Compare weight and volume. Tiles usually hit the weight limit, so a 20GP is common.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tiles and slabs per container | Hank">
+<meta property="og:description" content="Boxes, square metres, pieces and weight for a 20GP or 40HQ. Planning defaults only — edit the payload if your forwarder gives a different limit.">
+<meta property="og:url" content="https://hanzaiheng-cpu.github.io/hank/tools/tile-container-calculator.html">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hanzaiheng-cpu.github.io/hank/tools/tile-container-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+button.btn{font:inherit;cursor:pointer}
+button.btn-o{background:#fff}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="../index.html">Hank <span>· Guangzhou Sourcing</span></a>
+<ul><li><a href="../index.html#pricing">Pricing</a></li><li><a href="../clusters/index.html">Clusters</a></li><li><a href="../services/construction-materials-export.html">Materials export</a></li><li><a href="index.html">Free tools</a></li><li><a href="../services/factory-audit-qc-inspection.html">QC &amp; audits</a></li><li><a href="../services/china-domestic-logistics.html">Logistics</a></li><li><a href="../quote-calculator.html">Quote calculator</a></li><li><a href="../index.html#quote">Free quote</a></li></ul>
+</div></nav>
+<article class="doc">
+<span class="tag">Free tool · Estimate</span>
+<h1>Tiles and slabs per container</h1>
+<p class="lead">See how many boxes fit before the container runs out of payload or cube. Tile is dense, so the weight limit is usually reached first. That is why a 20GP is the common choice.</p>
+
+<form class="calc" id="calc" onsubmit="return false">
+<label>Tile size
+<select id="preset">
+<option value="600x600">600 × 600 mm</option>
+<option value="600x1200">600 × 1200 mm</option>
+<option value="800x800">800 × 800 mm</option>
+<option value="750x1500">750 × 1500 mm</option>
+<option value="1200x2400">1200 × 2400 mm slab</option>
+<option value="custom">Custom size</option>
+</select>
+</label>
+<label>Container
+<select id="box">
+<option value="20GP">20GP</option>
+<option value="40HQ">40HQ</option>
+</select>
+</label>
+<label>Length (mm)
+<input id="len" type="number" inputmode="decimal" min="0" step="any" value="600">
+</label>
+<label>Width (mm)
+<input id="wid" type="number" inputmode="decimal" min="0" step="any" value="600">
+</label>
+<label>Thickness (mm)
+<input id="thk" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 10">
+</label>
+<label>Pieces per box
+<input id="pcs" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 4">
+</label>
+<label>Box weight (kg)
+<input id="boxkg" type="number" inputmode="decimal" min="0" step="any" placeholder="gross, if you know it">
+</label>
+<label>Tile density (g/cm³)
+<input id="dens" type="number" inputmode="decimal" min="0" step="any" value="2.35">
+</label>
+<label>Extra packaging per box (kg)
+<input id="pack" type="number" inputmode="decimal" min="0" step="any" value="0">
+</label>
+<label>Practical payload (kg)
+<input id="payload" type="number" inputmode="decimal" min="0" step="any" value="25000">
+</label>
+<label class="full">Internal volume used for the check (m³)
+<input id="cube" type="number" inputmode="decimal" min="0" step="any" value="33">
+</label>
+</form>
+<p class="meta">A 20GP is often rated around 26–28 t. For tiles, 25 t is a practical planning limit, so that is the starting payload. A 40HQ has much more cube (the starting figure is 76 m³) but a similar gross-weight ceiling, so the starting payload is 26 t. Replace both numbers with your forwarder's limits. If you type a box weight, that gross weight is used and density is ignored. Density is only a fallback, and ceramic body weight is often about 2.3–2.4 g/cm³.</p>
+
+<div class="res" aria-live="polite">
+<p id="err" class="note" hidden></p>
+<table id="out">
+<tr><td>Boxes that fit</td><td id="o_boxes"></td></tr>
+<tr><td>Pieces</td><td id="o_pcs"></td></tr>
+<tr><td>Area</td><td id="o_m2"></td></tr>
+<tr><td>Estimated weight</td><td id="o_kg"></td></tr>
+<tr><td>Weight per box used</td><td id="o_each"></td></tr>
+<tr><td>Limiting factor</td><td id="o_limit"></td></tr>
+</table>
+<p class="note" id="weight-note"></p>
+<p class="note">Results are estimates. Cartons, pallets and bracing take more space than the solid tile, so the volume check is optimistic. The shipping line's actual payload can be lower than the number above. This is not a loading plan.</p>
+</div>
+
+<div class="endcta">
+<h2>Shipping tiles from a Chinese factory?</h2>
+<p>I can shortlist tile and sanitary suppliers, check samples in Guangzhou, and consolidate before the port.</p>
+<div class="cta">
+<a class="btn btn-p" href="../services/construction-materials-export.html">Construction materials export</a>
+<a class="btn btn-o" href="../index.html#quote">Free quote form</a>
+</div>
+</div>
+</article>
+<footer>© 2026 Hank · Guangzhou, China · <a href="../index.html">Home</a> · <a href="index.html">Free tools</a> · <a href="../services/construction-materials-export.html">Materials export</a> · <a href="../index.html#quote">Free quote</a> · <a href="../clusters/index.html">Industrial clusters</a> · <a href="../services/sample-consolidation.html">Sample consolidation</a> · <a href="../services/china-domestic-logistics.html">Logistics</a></footer>
+<script>
+var PRESETS={
+  "600x600":[600,600],
+  "600x1200":[600,1200],
+  "800x800":[800,800],
+  "750x1500":[750,1500],
+  "1200x2400":[1200,2400]
+};
+var CONTAINERS={
+  "20GP":{payload:25000,volume:33},
+  "40HQ":{payload:26000,volume:76}
+};
+function $(id){return document.getElementById(id)}
+function read(id){
+  var raw=$(id).value.trim();
+  if(raw==="") return null;
+  var n=Number(raw);
+  return Number.isFinite(n)?n:NaN;
+}
+function fmt(n,digits){
+  return n.toLocaleString("en-US",{maximumFractionDigits:digits,minimumFractionDigits:digits});
+}
+function applyPreset(){
+  var pair=PRESETS[$("preset").value];
+  if(!pair) return;
+  $("len").value=pair[0];
+  $("wid").value=pair[1];
+}
+function applyContainer(){
+  var c=CONTAINERS[$("box").value];
+  $("payload").value=c.payload;
+  $("cube").value=c.volume;
+}
+function run(){
+  var L=read("len"), W=read("wid"), T=read("thk"), pcs=read("pcs");
+  var boxkg=read("boxkg"), dens=read("dens"), pack=read("pack");
+  var payload=read("payload"), cube=read("cube");
+  if(pack===null) pack=0;
+  var err="";
+  if([L,W,T].some(function(n){return n===null||Number.isNaN(n)||n<=0})) err="Enter length, width and thickness greater than 0.";
+  else if(pcs===null||Number.isNaN(pcs)||pcs<=0||Math.floor(pcs)!==pcs) err="Enter a whole number of pieces per box.";
+  else if(boxkg!==null&&(Number.isNaN(boxkg)||boxkg<0)) err="Box weight must be blank or 0 or more.";
+  else if((boxkg===null||boxkg===0)&&(dens===null||Number.isNaN(dens)||dens<=0)) err="Enter a box weight, or a tile density greater than 0.";
+  else if(Number.isNaN(pack)||pack<0) err="Extra packaging must be 0 or more.";
+  else if(payload===null||Number.isNaN(payload)||payload<=0) err="Enter a practical payload greater than 0.";
+  else if(cube===null||Number.isNaN(cube)||cube<=0) err="Enter an internal volume greater than 0.";
+  $("err").hidden=!err;
+  $("err").textContent=err;
+  $("out").hidden=!!err;
+  $("weight-note").hidden=!!err;
+  if(err) return;
+  var tileM2=(L/1000)*(W/1000);
+  var tileM3=tileM2*(T/1000);
+  var each, kind;
+  if(boxkg>0){
+    each=boxkg;
+    kind="gross";
+  }else{
+    var ceramic=dens*L*W*T/1e6*pcs;
+    each=ceramic+pack;
+    kind=pack>0?"packed":"ceramic";
+  }
+  var boxM3=tileM3*pcs;
+  var byWeight=Math.floor(payload/each);
+  var byVolume=Math.floor(cube/boxM3);
+  if(!Number.isFinite(byWeight)||byWeight<0) byWeight=0;
+  if(!Number.isFinite(byVolume)||byVolume<0) byVolume=0;
+  var boxes=Math.min(byWeight,byVolume);
+  var limit=byWeight<byVolume?"weight":byVolume<byWeight?"volume":"both";
+  $("o_boxes").textContent=fmt(boxes,0);
+  $("o_pcs").textContent=fmt(boxes*pcs,0);
+  $("o_m2").textContent=fmt(boxes*pcs*tileM2,2)+" m²";
+  var weightLabel=kind==="gross"?"Gross weight from your box weight":kind==="packed"?"Ceramic weight plus the packaging you entered":"Ceramic weight only — carton and pallet weight are not included";
+  $("o_kg").textContent=fmt(boxes*each,1)+" kg";
+  $("o_each").textContent=fmt(each,2)+" kg · "+weightLabel;
+  var limitText=limit==="weight"
+    ?"Weight. Payload allows "+fmt(byWeight,0)+" boxes; solid tile volume would allow "+fmt(byVolume,0)+"."
+    :limit==="volume"
+    ?"Volume. The cube allows "+fmt(byVolume,0)+" boxes; payload would allow "+fmt(byWeight,0)+"."
+    :"Weight and volume allow the same number of boxes ("+fmt(boxes,0)+").";
+  $("o_limit").textContent=limitText;
+  $("weight-note").textContent="Tiles usually hit the weight limit before the container is full, so a 20GP is common. This run is limited by "+(limit==="both"?"weight and volume together":limit)+".";
+}
+$("preset").addEventListener("change",function(){applyPreset();run()});
+$("box").addEventListener("change",function(){applyContainer();run()});
+["len","wid"].forEach(function(id){
+  $(id).addEventListener("input",function(){
+    var match=Object.keys(PRESETS).find(function(key){
+      return PRESETS[key][0]===Number($("len").value)&&PRESETS[key][1]===Number($("wid").value);
+    });
+    $("preset").value=match||"custom";
+  });
+});
+document.getElementById("calc").addEventListener("input",run);
+run();
+</script>
+</body>
+</html>
